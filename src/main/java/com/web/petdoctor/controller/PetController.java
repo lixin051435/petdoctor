@@ -4,6 +4,7 @@ import com.web.petdoctor.domain.Pet;
 import com.web.petdoctor.domain.User;
 import com.web.petdoctor.repository.PetRepository;
 import com.web.petdoctor.repository.UserRepository;
+import com.web.petdoctor.vo.PetVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,14 +44,9 @@ public class PetController extends BaseController<Pet> {
 
     @RequestMapping("/findByUserId")
     public ResponseEntity findByUserId(String userId) {
-        User user = userRepository.findById(userId).get();
-        String[] petIds = user.getPets().split(",");
-        List<Pet> pets = new ArrayList<>();
-        for (int i = 0; i < petIds.length; i++) {
-            pets.add(petRepository.findById(petIds[i]).get());
-        }
-        return ResponseEntity.ok(pets);
+        return ResponseEntity.ok(petRepository.findAllByUserId(userId));
     }
+
 
     @RequestMapping("/save")
     public ResponseEntity edit(Pet form) {

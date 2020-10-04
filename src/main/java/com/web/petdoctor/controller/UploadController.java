@@ -24,7 +24,7 @@ public class UploadController {
 
     @RequestMapping(value = "/fileupload")
     public ResponseEntity upload(MultipartFile file) throws IOException {
-        //获得项目的类路径
+        //获得项目的类路径 项目路径不能有英文
         String path = ResourceUtils.getURL("classpath:").getPath();
         //空文件夹在编译时不会打包进入target中
         File uploadDir = new File(path + "/static/images/product");

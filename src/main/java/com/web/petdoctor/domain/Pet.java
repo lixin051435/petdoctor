@@ -19,6 +19,17 @@ public class Pet {
     private String petName;
     private String petCategory;
     private String petIcon;
+    private String userId;
+
+    @Basic
+    @Column(name = "user_id")
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     @Id
     @GeneratedValue(generator = "jpa-uuid")

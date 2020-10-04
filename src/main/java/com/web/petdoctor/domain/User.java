@@ -23,7 +23,6 @@ public class User {
     private String userPassword;
     private String userPhone;
     private String userRealname;
-    private String pets;
 
     @Id
     @GeneratedValue(generator = "jpa-uuid")
@@ -106,16 +105,6 @@ public class User {
         this.userRealname = userRealname;
     }
 
-    @Basic
-    @Column(name = "pets")
-    public String getPets() {
-        return pets;
-    }
-
-    public void setPets(String pets) {
-        this.pets = pets;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -128,13 +117,12 @@ public class User {
                 Objects.equals(userNickname, user.userNickname) &&
                 Objects.equals(userPassword, user.userPassword) &&
                 Objects.equals(userPhone, user.userPhone) &&
-                Objects.equals(userRealname, user.userRealname) &&
-                Objects.equals(pets, user.pets);
+                Objects.equals(userRealname, user.userRealname);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(userId, userAddress, userEmail, userGender, userNickname, userPassword, userPhone, userRealname, pets);
+        return Objects.hash(userId, userAddress, userEmail, userGender, userNickname, userPassword, userPhone, userRealname);
     }
 }
