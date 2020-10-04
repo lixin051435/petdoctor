@@ -38,8 +38,8 @@ public class UserController extends BaseController<User> {
     }
 
     @RequestMapping("/login")
-    public ResponseEntity login(String nickname,String password) {
-        return ResponseEntity.ok(userRepository.findByUserNicknameAndUserPassword(nickname,password));
+    public ResponseEntity login(User form) {
+        return ResponseEntity.ok(userRepository.findByUserNicknameAndUserPassword(form.getUserNickname(),form.getUserPassword()));
     }
 
 

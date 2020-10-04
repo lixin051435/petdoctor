@@ -40,8 +40,8 @@ public class AdminController extends BaseController<Admin> {
     }
 
     @RequestMapping("/login")
-    public ResponseEntity login(String nickname,String password) {
-        return ResponseEntity.ok(adminRepository.findByAdminNicknameAndAdminPassword(nickname,password));
+    public ResponseEntity login(Admin form) {
+        return ResponseEntity.ok(adminRepository.findByAdminNicknameAndAdminPassword(form.getAdminNickname(),form.getAdminPassword()));
     }
 
 

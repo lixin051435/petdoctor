@@ -40,8 +40,8 @@ public class DoctorController extends BaseController<Doctor> {
     }
 
     @RequestMapping("/login")
-    public ResponseEntity login(String nickname,String password) {
-        return ResponseEntity.ok(doctorRepository.findByDoctorNicknameAndDoctorPassword(nickname,password));
+    public ResponseEntity login(Doctor form) {
+        return ResponseEntity.ok(doctorRepository.findByDoctorNicknameAndDoctorPassword(form.getDoctorNickname(),form.getDoctorPassword()));
     }
 
 
