@@ -1,5 +1,6 @@
 package com.web.petdoctor.controller;
 
+import com.web.petdoctor.constants.SystemConstants;
 import com.web.petdoctor.domain.Admin;
 import com.web.petdoctor.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,9 @@ public class AdminController extends BaseController<Admin> {
 
 
     @RequestMapping("/list")
-    public ResponseEntity list(@RequestParam(defaultValue = "0") int page,
-                               @RequestParam(defaultValue = "5") int size) {
-        return ResponseEntity.ok(findByPage(page,size));
+    public ResponseEntity list(@RequestParam(defaultValue = SystemConstants.PAGE) int page,
+                               @RequestParam(defaultValue = SystemConstants.SIZE) int size) {
+        return ResponseEntity.ok(findByPage(page, size));
     }
 
 
@@ -41,7 +42,7 @@ public class AdminController extends BaseController<Admin> {
 
     @RequestMapping("/login")
     public ResponseEntity login(Admin form) {
-        return ResponseEntity.ok(adminRepository.findByAdminNicknameAndAdminPassword(form.getAdminNickname(),form.getAdminPassword()));
+        return ResponseEntity.ok(adminRepository.findByAdminNicknameAndAdminPassword(form.getAdminNickname(), form.getAdminPassword()));
     }
 
 
@@ -49,4 +50,10 @@ public class AdminController extends BaseController<Admin> {
     public ResponseEntity delete(String id) {
         return ResponseEntity.ok(remove(id));
     }
+
+    @RequestMapping("/findAll")
+    public ResponseEntity getAll() {
+        return ResponseEntity.ok(findAll());
+    }
+
 }

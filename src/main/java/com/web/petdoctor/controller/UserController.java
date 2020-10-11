@@ -1,5 +1,6 @@
 package com.web.petdoctor.controller;
 
+import com.web.petdoctor.constants.SystemConstants;
 import com.web.petdoctor.domain.User;
 import com.web.petdoctor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,15 @@ public class UserController extends BaseController<User> {
         this.userRepository = userRepository;
         super.init(userRepository);
     }
+    @RequestMapping("/findAll")
+    public ResponseEntity getAll() {
+        return ResponseEntity.ok(findAll());
+    }
 
 
     @RequestMapping("/list")
-    public ResponseEntity list(@RequestParam(defaultValue = "0") int page,
-                               @RequestParam(defaultValue = "5") int size) {
+    public ResponseEntity list(@RequestParam(defaultValue = SystemConstants.PAGE) int page,
+                               @RequestParam(defaultValue = SystemConstants.SIZE) int size) {
         return ResponseEntity.ok(findByPage(page,size));
     }
 

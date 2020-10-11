@@ -1,5 +1,6 @@
 package com.web.petdoctor.controller;
 
+import com.web.petdoctor.constants.SystemConstants;
 import com.web.petdoctor.domain.*;
 import com.web.petdoctor.enums.OrderStatusEnum;
 import com.web.petdoctor.repository.*;
@@ -42,11 +43,15 @@ public class OrderController extends BaseController<Order> {
 
 
     @RequestMapping("/list")
-    public ResponseEntity list(@RequestParam(defaultValue = "0") int page,
-                               @RequestParam(defaultValue = "5") int size,
+    public ResponseEntity list(@RequestParam(defaultValue = SystemConstants.PAGE) int page,
+                               @RequestParam(defaultValue = SystemConstants.SIZE) int size,
                                String username) {
         Pageable pageable = PageRequest.of(page,size);
         return ResponseEntity.ok(orderRepository.findAllByRealname(username,pageable));
+    }
+    @RequestMapping("/findAll")
+    public ResponseEntity getAll() {
+        return ResponseEntity.ok(findAll());
     }
 
 

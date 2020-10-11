@@ -1,5 +1,6 @@
 package com.web.petdoctor.controller;
 
+import com.web.petdoctor.constants.SystemConstants;
 import com.web.petdoctor.domain.Pet;
 import com.web.petdoctor.domain.User;
 import com.web.petdoctor.repository.PetRepository;
@@ -7,12 +8,10 @@ import com.web.petdoctor.repository.UserRepository;
 import com.web.petdoctor.vo.PetVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,7 +37,7 @@ public class PetController extends BaseController<Pet> {
 
 
     @RequestMapping("/list")
-    public ResponseEntity list(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+    public ResponseEntity list(@RequestParam(defaultValue = SystemConstants.PAGE) int page, @RequestParam(defaultValue = SystemConstants.SIZE) int size) {
         return ResponseEntity.ok(findByPage(page,size));
     }
 
@@ -57,4 +56,21 @@ public class PetController extends BaseController<Pet> {
     public ResponseEntity delete(String id) {
         return ResponseEntity.ok(remove(id));
     }
+
+    @RequestMapping("/get/{id}")
+    public ResponseEntity getById(@PathVariable("id") String id) {
+        return ResponseEntity.ok(findById(id));
+    }
+    @RequestMapping("/banner/{number}")
+    public ResponseEntity getBanner(@PathVariable("number") Integer number) {
+        List<Pet> list = petRepository.findAll();
+        Collections.shuffle(list);
+        list = list.subList(0,number);
+        return ResponseEntity.ok(list);
+    }
+    @RequestMapping("/findAll")
+    public ResponseEntity getAll() {
+        return ResponseEntity.ok(findAll());
+    }
+
 }

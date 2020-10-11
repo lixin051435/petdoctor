@@ -1,5 +1,6 @@
 package com.web.petdoctor.controller;
 
+import com.web.petdoctor.constants.SystemConstants;
 import com.web.petdoctor.domain.Info;
 import com.web.petdoctor.repository.InfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,12 @@ public class InfoController extends BaseController<Info> {
 
 
     @RequestMapping("/list")
-    public ResponseEntity list(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+    public ResponseEntity list(@RequestParam(defaultValue = SystemConstants.PAGE) int page, @RequestParam(defaultValue = SystemConstants.SIZE) int size) {
         return ResponseEntity.ok(findByPage(page,size));
+    }
+    @RequestMapping("/findAll")
+    public ResponseEntity getAll() {
+        return ResponseEntity.ok(findAll());
     }
 
 
