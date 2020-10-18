@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -71,6 +72,10 @@ public class OrderController extends BaseController<Order> {
         form.setPetIcon(pet.getPetIcon());
 
         return ResponseEntity.ok(update(form));
+    }
+    @RequestMapping("/get/{id}")
+    public ResponseEntity getById(@PathVariable String id){
+        return ResponseEntity.ok(findById(id));
     }
 
     @RequestMapping("/delete")

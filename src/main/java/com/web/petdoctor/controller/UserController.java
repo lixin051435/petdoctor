@@ -46,6 +46,10 @@ public class UserController extends BaseController<User> {
     public ResponseEntity login(User form) {
         return ResponseEntity.ok(userRepository.findByUserNicknameAndUserPassword(form.getUserNickname(),form.getUserPassword()));
     }
+    @RequestMapping("/get/{id}")
+    public ResponseEntity getById(@PathVariable String id){
+        return ResponseEntity.ok(findById(id));
+    }
 
 
     @RequestMapping("/delete")

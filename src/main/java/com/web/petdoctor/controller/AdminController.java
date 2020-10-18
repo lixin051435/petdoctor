@@ -5,6 +5,7 @@ import com.web.petdoctor.domain.Admin;
 import com.web.petdoctor.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +44,10 @@ public class AdminController extends BaseController<Admin> {
     @RequestMapping("/login")
     public ResponseEntity login(Admin form) {
         return ResponseEntity.ok(adminRepository.findByAdminNicknameAndAdminPassword(form.getAdminNickname(), form.getAdminPassword()));
+    }
+    @RequestMapping("/get/{id}")
+    public ResponseEntity getById(@PathVariable String id){
+        return ResponseEntity.ok(findById(id));
     }
 
 
