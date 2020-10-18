@@ -23,6 +23,17 @@ public class User {
     private String userPassword;
     private String userPhone;
     private String userRealname;
+    private String userIcon;
+
+    @Basic
+    @Column(name = "user_icon")
+    public String getUserIcon() {
+        return userIcon;
+    }
+
+    public void setUserIcon(String userIcon) {
+        this.userIcon = userIcon;
+    }
 
     @Id
     @GeneratedValue(generator = "jpa-uuid")
