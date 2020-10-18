@@ -2,6 +2,8 @@ package com.web.petdoctor.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.web.petdoctor.enums.OrderStatusEnum;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -16,6 +18,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "t_order", schema = "db_pet", catalog = "")
+@EntityListeners(AuditingEntityListener.class)
 public class Order {
     private String orderId;
     private String userId;
@@ -30,6 +33,8 @@ public class Order {
     private String symptom;
     private String solution;
     private String ordertime;
+
+    @CreatedDate
     private Date createtime;
     private Integer orderstatus = OrderStatusEnum.ORDERING.getCode();
 

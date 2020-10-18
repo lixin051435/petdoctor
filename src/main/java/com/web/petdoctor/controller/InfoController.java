@@ -37,6 +37,10 @@ public class InfoController extends BaseController<Info> {
     public ResponseEntity getAll() {
         return ResponseEntity.ok(findAll());
     }
+    @RequestMapping("/findAllByType")
+    public ResponseEntity getAllByType(String type) {
+        return ResponseEntity.ok(infoRepository.findAllByInfoType(type));
+    }
 
     @RequestMapping("/get/{id}")
     public ResponseEntity getById(@PathVariable String id){

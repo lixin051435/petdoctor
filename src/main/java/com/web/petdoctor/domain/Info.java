@@ -1,11 +1,14 @@
 package com.web.petdoctor.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
-
+import java.util.Date;
 /**
  * @ClassName : Info
  * @Description :
@@ -15,12 +18,26 @@ import java.util.Objects;
 @Entity
 @Table(name = "t_info", schema = "db_pet", catalog = "")
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
+@EntityListeners(AuditingEntityListener.class)
 public class Info {
     private String infoId;
     private String infoTitle;
     private String infoType;
     private String infoContent;
-    private Timestamp createtime;
+    private String infoIcon;
+
+    @CreatedDate
+    private Date createtime;
+
+    @Basic
+    @Column(name = "info_icon")
+    public String getInfoIcon() {
+        return infoIcon;
+    }
+
+    public void setInfoIcon(String infoIcon) {
+        this.infoIcon = infoIcon;
+    }
 
     @Id
     @GeneratedValue(generator = "jpa-uuid")
@@ -65,11 +82,12 @@ public class Info {
 
     @Basic
     @Column(name = "createtime")
-    public Timestamp getCreatetime() {
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    public Date getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Timestamp createtime) {
+    public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
 
