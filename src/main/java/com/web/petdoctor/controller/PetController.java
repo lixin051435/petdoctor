@@ -65,7 +65,10 @@ public class PetController extends BaseController<Pet> {
     public ResponseEntity getBanner(@PathVariable("number") Integer number) {
         List<Pet> list = petRepository.findAll();
         Collections.shuffle(list);
-        list = list.subList(0,number);
+//        list = list.subList(0,number);
+        if(list.size() > 4){
+            list = list.subList(0,4);
+        }
         return ResponseEntity.ok(list);
     }
     @RequestMapping("/findAll")
