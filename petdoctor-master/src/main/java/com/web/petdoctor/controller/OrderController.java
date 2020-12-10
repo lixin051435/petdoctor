@@ -73,6 +73,14 @@ public class OrderController extends BaseController<Order> {
 
         return ResponseEntity.ok(update(form));
     }
+
+    @RequestMapping("/update")
+    public ResponseEntity modify(String orderId,String solution,Integer orderstatus) {
+        Order order = orderRepository.findById(orderId).get();
+        order.setSolution(solution);
+        order.setOrderstatus(orderstatus);
+        return ResponseEntity.ok(update(order));
+    }
     @RequestMapping("/get/{id}")
     public ResponseEntity getById(@PathVariable String id){
         return ResponseEntity.ok(findById(id));
@@ -89,6 +97,7 @@ public class OrderController extends BaseController<Order> {
     }
     @RequestMapping("/getByDoctorId/{id}")
     public ResponseEntity getByDoctorId(@PathVariable String id){
-        return ResponseEntity.ok(orderRepository.findAllByDoctorId(id));
+//        return ResponseEntity.ok(orderRepository.findAllByDoctorId(id));
+        return ResponseEntity.ok(orderRepository.findAllByDoctorIdAndOrderstatusOrderByOrdertime(id,0));
     }
 }
