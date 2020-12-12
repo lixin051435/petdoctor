@@ -100,4 +100,14 @@ public class OrderController extends BaseController<Order> {
 //        return ResponseEntity.ok(orderRepository.findAllByDoctorId(id));
         return ResponseEntity.ok(orderRepository.findAllByDoctorIdAndOrderstatusOrderByOrdertime(id,0));
     }
+
+    @RequestMapping("/getAllByRealnameLike")
+    public ResponseEntity getAllByRealnameLike(String realname){
+        return ResponseEntity.ok(orderRepository.findAllByRealnameLike("%"+realname+"%"));
+    }
+
+    @RequestMapping("/doctorSearch")
+    public ResponseEntity doctorSearch(String doctorId,String realname){
+        return ResponseEntity.ok(orderRepository.findAllByDoctorIdAndRealnameLikeAndOrderstatusOrderByOrdertime(doctorId,"%"+realname+"%",0));
+    }
 }
